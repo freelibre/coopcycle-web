@@ -101,7 +101,9 @@ security:
             stateless: true
             guard:
                 authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+                    - AppBundle\Security\StoreTokenAuthenticator
+                    # - lexik_jwt_authentication.jwt_token_authenticator
+                # entry_point: AppBundle\Security\StoreTokenAuthenticator
 
         token_refresh:
             pattern:  ^/api/token/refresh
