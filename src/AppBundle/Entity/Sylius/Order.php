@@ -70,6 +70,8 @@ class Order extends BaseOrder implements OrderInterface
 
     protected $timeline;
 
+    protected $shortNumber;
+
     public function __construct()
     {
         parent::__construct();
@@ -284,5 +286,21 @@ class Order extends BaseOrder implements OrderInterface
         if (null !== $this->timeline) {
             return $this->timeline->getPickupExpectedAt();
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShortNumber(): string
+    {
+        return $this->shortNumber;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShortNumber($shortNumber): void
+    {
+        $this->shortNumber = $shortNumber;
     }
 }

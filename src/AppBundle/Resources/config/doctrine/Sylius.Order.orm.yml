@@ -6,6 +6,10 @@ AppBundle\Entity\Sylius\Order:
             type: datetime
             column: shipped_at
             nullable: true
+        shortNumber:
+            type: string
+            column: short_number
+            nullable: true
     manyToOne:
         customer:
             targetEntity: AppBundle\Entity\ApiUser

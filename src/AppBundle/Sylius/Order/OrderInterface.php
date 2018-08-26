@@ -65,4 +65,14 @@ interface OrderInterface extends BaseOrderInterface, PaymentsSubjectInterface
      * @param Delivery
      */
     public function setDelivery(Delivery $delivery): void;
+
+    /**
+     * @return string
+     */
+    public function getShortNumber(): string;
+
+    /**
+     * @param string
+     */
+    public function setShortNumber($shortNumber): void;
 }
