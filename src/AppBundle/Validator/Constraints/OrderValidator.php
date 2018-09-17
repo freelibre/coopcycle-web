@@ -82,7 +82,7 @@ class OrderValidator extends ConstraintValidator
         $order = $object;
         $isNew = $order->getId() === null;
 
-        if ($isNew && $order->getShippedAt() < $now) {
+        if ($isNew && null !== $order->getShippedAt() && $order->getShippedAt() < $now) {
             $this->context->buildViolation($constraint->dateHasPassedMessage)
                 ->setParameter('%date%', $order->getShippedAt()->format('Y-m-d H:i:s'))
                 ->atPath('shippedAt')
