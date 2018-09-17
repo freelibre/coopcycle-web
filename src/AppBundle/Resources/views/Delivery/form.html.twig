@@ -49,6 +49,8 @@
 
   <div class="row">
     <div class="col-sm-6">
+      <div id="user-search"></div>
+      <hr>
       {{ form_row(form.vehicle) }}
       {{ form_row(form.weight) }}
       {{ form_row(form.pickup) }}
@@ -129,13 +131,20 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ asset('js/widgets.js') }}"></script>
 <script>
   window.AppData = window.AppData || {};
   window.AppData.DeliveryForm = {
     calculatePriceURL: "{{ path(calculate_price_route) }}"
   };
+  new CoopCycle.Search(document.querySelector('#user-search'), {
+    url: "{{ path('admin_users_search', { format: 'json'  }) }}",
+    placeholder: "Rechercher un utilisateur…",
+    onSuggestionSelected: function(suggestion) {
+
+    }
+  });
 </script>
-<script src="{{ asset('js/widgets.js') }}"></script>
 <script src="{{ asset('js/delivery-form.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ coopcycle_setting('google_api_key') }}&libraries=places&callback=initMap"
   async defer></script>
