@@ -311,3 +311,7 @@ event_bus:
 
 nelmio_alice:
     locale: 'fr_FR'
+
+jmose_command_scheduler:
+    # https://github.com/J-Mose/CommandSchedulerBundle/issues/108
+    monitor_mail_subject: 'cronjob monitoring %%s, %%s'
