@@ -37,6 +37,7 @@
     "prop-types": "^15.6.2",
     "redis": "^2.8.0",
     "redux": "^3.7.2",
+    "redux-actions": "^2.6.1",
     "sequelize": "^4.38.1",
     "socket.io": "2.0.3",
     "whatwg-fetch": "^2.0.4",

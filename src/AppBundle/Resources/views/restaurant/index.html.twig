@@ -109,6 +109,9 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
+
+      <div id="cart-redux"></div>
+
       {{ form_start(cart_form) }}
         {# These inputs are managed with React  #}
         {% do cart_form.date.setRendered %}
@@ -201,6 +204,7 @@
 
 {% block scripts %}
 <script src="{{ asset('js/widgets.js') }}"></script>
+<script src="{{ asset('js/cart-redux.js') }}"></script>
 <script>
 
 new CoopCycle.OpeningHoursParser(document.querySelector('#opening-hours'), {
@@ -208,10 +212,10 @@ new CoopCycle.OpeningHoursParser(document.querySelector('#opening-hours'), {
   locale: $('html').attr('lang')
 });
 
-$('form.list-group-item').on('submit', function(e) {
-  e.preventDefault();
-  window.AppData.CartHelper.addProduct($(this).attr('action'), 1);
-});
+// $('form.list-group-item').on('submit', function(e) {
+//   e.preventDefault();
+//   window.AppData.CartHelper.addProduct($(this).attr('action'), 1);
+// });
 
 // Make sure all (non-additional) options have been checked
 $('form[data-product-options] input[type="radio"]').on('click', function(e) {
@@ -265,6 +269,17 @@ $('.modal').on('hidden.bs.modal', function(e) {
 {% set cart = cart_provider.getCart() %}
 
 function initMap() {
+
+  {% set cart = cart_provider.getCart() %}
+
+  var preloadedState = {{ cart_provider.normalize(cart)|json_encode()|raw }};
+  var cart = new CoopCycle.Cart(document.querySelector('#cart-redux'), preloadedState);
+
+  $('form.list-group-item').on('submit', function(e) {
+    e.preventDefault();
+    cart.addItem($(this).attr('action'));
+  });
+
   window.AppData.CartHelper.init(document.querySelector('#cart'), {
     restaurant: {
       id: {{ restaurant.id }},
