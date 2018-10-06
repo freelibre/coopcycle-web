@@ -26,6 +26,10 @@ class CartTotal extends React.Component {
         </div>
       )
     }
+
+    return (
+      <div></div>
+    )
   }
 
 }
