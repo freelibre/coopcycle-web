@@ -92,6 +92,9 @@ const errors = (state = initialState.errors, action = {}) => {
 
         return newState
       }
+    case ADD_ITEM_SUCCESS:
+    case ADD_ITEM_FAILURE:
+      return []
     default:
       return state
   }
