@@ -273,6 +273,11 @@ function initMap() {
   {% set cart = cart_provider.getCart() %}
 
   var preloadedState = {{ cart_provider.normalize(cart)|json_encode()|raw }};
+
+  preloadedState = Object.assign(preloadedState, {
+    removeFromCartURL: "{{ path('restaurant_remove_from_cart', { id: restaurant.id, cartItemId: '__CART_ITEM_ID__' }) }}",
+  });
+
   var cart = new CoopCycle.Cart(document.querySelector('#cart-redux'), preloadedState);
 
   $('form.list-group-item').on('submit', function(e) {

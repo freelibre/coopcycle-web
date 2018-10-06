@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
 import CartItem from './CartItem'
+import { removeItem } from '../redux/actions'
 
 class CartItems extends React.Component {
 
@@ -24,7 +25,7 @@ class CartItems extends React.Component {
             total={ item.total }
             quantity={ item.quantity }
             adjustments={ item.adjustments }
-            onClickRemove={ () => console.log('REMOVE') } />
+            onClickRemove={ () => this.props.removeItem(item.id) } />
         )) }
       </div>
     )
@@ -38,4 +39,10 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(translate()(CartItems))
+function mapDispatchToProps(dispatch) {
+  return {
+    removeItem: itemID => dispatch(removeItem(itemID)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(translate()(CartItems))

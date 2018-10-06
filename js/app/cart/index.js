@@ -13,6 +13,8 @@ import { addItem } from './redux/actions'
 window.CoopCycle = window.CoopCycle || {}
 window.CoopCycle.Cart = (el, preloadedState) => {
 
+  // console.log(preloadedState)
+
   const store = createStoreFromPreloadedState(preloadedState)
 
   render(
@@ -25,6 +27,6 @@ window.CoopCycle.Cart = (el, preloadedState) => {
   )
 
   return {
-    addItem: (itemURL, quantity = 1) => store.dispatch(addItem(itemURL, quantity))
+    addItem: (itemURL, quantity = 1) => store.dispatch(addItem(itemURL, quantity)),
   }
 }

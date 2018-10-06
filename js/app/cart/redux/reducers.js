@@ -4,13 +4,16 @@ import {
   FETCH_REQUEST,
   ADD_ITEM_SUCCESS,
   ADD_ITEM_FAILURE,
+  REMOVE_ITEM_SUCCESS,
+  REMOVE_ITEM_FAILURE,
 } from './actions'
 
 const initialState = {
   isFetching: false,
   items: [],
   itemsTotal: 0,
-  total: 0
+  total: 0,
+  removeFromCartURL: '',
 }
 
 const isFetching = (state = initialState.isFetching, action = {}) => {
@@ -19,6 +22,8 @@ const isFetching = (state = initialState.isFetching, action = {}) => {
       return true
     case ADD_ITEM_SUCCESS:
     case ADD_ITEM_FAILURE:
+    case REMOVE_ITEM_SUCCESS:
+    case REMOVE_ITEM_FAILURE:
       return false
     default:
       return state
@@ -29,6 +34,8 @@ const items = (state = initialState.items, action = {}) => {
   switch (action.type) {
     case ADD_ITEM_SUCCESS:
     case ADD_ITEM_FAILURE:
+    case REMOVE_ITEM_SUCCESS:
+    case REMOVE_ITEM_FAILURE:
       const { cart } = action.payload
       return cart.items
     default:
@@ -38,12 +45,31 @@ const items = (state = initialState.items, action = {}) => {
 
 const itemsTotal = (state = initialState.itemsTotal, action = {}) => {
   switch (action.type) {
+    case ADD_ITEM_SUCCESS:
+    case ADD_ITEM_FAILURE:
+    case REMOVE_ITEM_SUCCESS:
+    case REMOVE_ITEM_FAILURE:
+      const { cart } = action.payload
+      return cart.itemsTotal
     default:
       return state
   }
 }
 
 const total = (state = initialState.total, action = {}) => {
+  switch (action.type) {
+    case ADD_ITEM_SUCCESS:
+    case ADD_ITEM_FAILURE:
+    case REMOVE_ITEM_SUCCESS:
+    case REMOVE_ITEM_FAILURE:
+      const { cart } = action.payload
+      return cart.total
+    default:
+      return state
+  }
+}
+
+const removeFromCartURL = (state = initialState.removeFromCartURL, action = {}) => {
   switch (action.type) {
     default:
       return state
@@ -55,4 +81,5 @@ export default combineReducers({
   items,
   itemsTotal,
   total,
+  removeFromCartURL,
 })
