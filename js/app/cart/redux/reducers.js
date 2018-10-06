@@ -14,6 +14,8 @@ const initialState = {
   itemsTotal: 0,
   total: 0,
   removeFromCartURL: '',
+  errors: [],
+  errorsKeys: [],
 }
 
 const isFetching = (state = initialState.isFetching, action = {}) => {
@@ -76,10 +78,38 @@ const removeFromCartURL = (state = initialState.removeFromCartURL, action = {}) 
   }
 }
 
+const errors = (state = initialState.errors, action = {}) => {
+  switch (action.type) {
+    case ADD_ITEM_FAILURE:
+    case REMOVE_ITEM_FAILURE:
+      const { errors } = action.payload
+
+      if (errors) {
+        let newState = []
+        _.forEach(errors, (messages, key) => {
+          newState = newState.concat(messages)
+        })
+
+        return newState
+      }
+    default:
+      return state
+  }
+}
+
+const errorsKeys = (state = initialState.errorsKeys, action = {}) => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   isFetching,
   items,
   itemsTotal,
   total,
   removeFromCartURL,
+  errors,
+  errorsKeys,
 })
