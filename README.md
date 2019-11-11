@@ -39,18 +39,6 @@ later.  By default, the Geocoding and Places API will not be enabled, so you
 need to enable them as well (`Maps API dashboard > APIs > Geocoding API >
 Enable`, and `Maps API dashboard > APIs > Places API for Web > Enable`).
 
-* (Linux) Setup permissions
-
-If you are using Linux, you will need to allow the user `www-data` used by the
-php docker container to write files to your local disk. You can do this by running
-the following commands in the directory containing your local clone of the
-repository:
-
-```
-sudo chown -R $(id -u):82 coopcycle-web
-sudo chmod -R g+w coopcycle-web
-```
-
 ### Run the application
 
 * Start the Docker containers
